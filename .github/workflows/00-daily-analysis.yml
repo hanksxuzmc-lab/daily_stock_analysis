@@ -405,7 +405,7 @@ jobs:
           MARKET_REVIEW_COLOR_SCHEME: ${{ vars.MARKET_REVIEW_COLOR_SCHEME || secrets.MARKET_REVIEW_COLOR_SCHEME || 'green_up' }}
           
           # ==========================================
-          # 运行配置 ⬅️ 新增！
+          # 运行配置
           # ==========================================
           REPORT_TYPE: ${{ vars.REPORT_TYPE || secrets.REPORT_TYPE || 'simple' }}
           REPORT_LANGUAGE: ${{ vars.REPORT_LANGUAGE || secrets.REPORT_LANGUAGE || '' }}
@@ -414,6 +414,10 @@ jobs:
           MARKET_REVIEW_ENABLED: ${{ vars.MARKET_REVIEW_ENABLED || secrets.MARKET_REVIEW_ENABLED || 'true' }}
           ANALYSIS_DELAY: ${{ vars.ANALYSIS_DELAY || secrets.ANALYSIS_DELAY || '0' }}
           TRADING_DAY_CHECK_ENABLED: ${{ vars.TRADING_DAY_CHECK_ENABLED || secrets.TRADING_DAY_CHECK_ENABLED || 'true' }}
+
+          # 自定义分析 Skill
+          AGENT_SKILLS: ${{ vars.AGENT_SKILLS }}
+          AGENT_SKILL_DIR: ${{ vars.AGENT_SKILL_DIR }}
           
           # ==========================================
           # 系统配置
@@ -458,6 +462,8 @@ jobs:
           echo "🎯 运行模式: $MODE"
           echo "📊 自选股: $STOCK_LIST"
           echo "📝 报告类型: $REPORT_TYPE"
+          echo "🧠 分析 Skill: ${AGENT_SKILLS:-默认}"
+          echo "📁 Skill 目录: ${AGENT_SKILL_DIR:-默认}"
           echo ""
           echo "=========================================="
           echo "📋 配置检查"
