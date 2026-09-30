@@ -59,7 +59,30 @@ jobs:
       - name: 创建必要目录
         run: |
           mkdir -p data logs reports
-      
+
+      - name: 测试 Anspire DeepSeek API
+        env:
+          TEST_KEY: ${{ secrets.LLM_ANSPIRE_API_KEY }}
+        run: |
+          curl -sS \
+            -o /tmp/anspire_test.json \
+            -w "HTTP_STATUS=%{http_code}\n" \
+            "https://open-gateway.anspire.cn/v6/chat/completions" \
+            -H "Authorization: Bearer $TEST_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "deepseek-v4.1-Flash",
+              "stream": false,
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Reply only with OK"
+                }
+              ]
+            }'
+
+          cat /tmp/anspire_test.json
+          
       - name: 执行股票分析
         env:
           # ==========================================
